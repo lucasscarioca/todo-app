@@ -1,28 +1,34 @@
 <div class="content-main">
-  <div class="content-head">
-    <h1>TODO</h1>
-    <p>Icon</p>
-  </div>
+  <div class="todo">
+    <header class="header">
+      <section class="content-logo">
+        <h2 class="logo-title">TODO</h2>
+        <button class="toggle">
+          <img class="todo-elem--hide" src="/images/icon-moon.svg" alt="moon icon to apply dark mode" />
+          <img  src="/images/icon-sun.svg" alt="sun icon to apply light mode" />
+        </button>
+      </section>
 
-  <div class="content-new-todo">Create a new todo...</div>
+      <div class="content-new-todo">Create a new todo...</div>
+    </header>
+    <div class="content-body">
+      <ul class="content-todolist">
+        <li>todo1</li>
+        <li>todo2</li>
+        <li>todo3</li>
+        <li>todo4</li>
+      </ul>
 
-  <div class="content-body">
-    <ul class="content-todolist">
-      <li>todo1</li>
-      <li>todo2</li>
-      <li>todo3</li>
-      <li>todo4</li>
-    </ul>
-
-    <div class="content-options">
-      <span>X items left</span>
-      <div class="content-filters">
-        <a href="#" class="content-filters">All</a>
-        <a href="#" class="content-filters">Active</a>
-        <a href="#" class="content-filters">Completed</a>
+      <div class="content-options">
+        <span>X items left</span>
+        <div class="content-filters">
+          <a href="#" class="content-filters">All</a>
+          <a href="#" class="content-filters">Active</a>
+          <a href="#" class="content-filters">Completed</a>
+        </div>
+        <a href="#">Clear Completed</a>
       </div>
-      <a href="#">Clear Completed</a>
     </div>
+    <footer>Drag and drop to reorder list</footer>
   </div>
-  <footer>Drag and drop to reorder list</footer>
 </div>

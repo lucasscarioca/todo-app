@@ -26,7 +26,9 @@ config :todoapp, TodoappWeb.Endpoint,
   secret_key_base: "Pmla19JEU0XWQ2D1QajL8B0DziUGeWE0n/Evwc31Nt2gRhjhg9bwTeHLjpCanYcr",
   watchers: [
     # Start the esbuild watcher by calling Esbuild.install_and_run(:default, args)
-    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]}
+    esbuild:
+      {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch --loader:.jpg=file)]},
+    tailwind: {Tailwind, :install_and_run, [:default, ~w(--watch)]}
   ]
 
 # ## SSL Support
