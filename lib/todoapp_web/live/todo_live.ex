@@ -3,6 +3,6 @@ defmodule TodoappWeb.TodoLive do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, theme: "")}
+    {:ok, socket}
   end
 end

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" id="root" class="dark">
+<html lang="en" id="root">
   <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -8,6 +8,45 @@
     <%= live_title_tag assigns[:page_title] || "Todo App" %>
     <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/app.css")}/>
     <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/app.js")}></script>
+
+      <!--
+        The script below is for switching dark/light color schemes.
+        This needs to be inlined here in the <head> because it will set a class on the document, which affects all "dark" prefixed classed (eg. dark:text-white). If you do this in the body or a separate javascript file then when in dark mode, the page will flash in light mode first before switching to dark mode.
+
+        Used by `color-scheme-hook.js`.
+      -->
+  <script>
+    window.applyTheme = function(scheme) {
+      if (scheme === "light") {
+        document.documentElement.classList.remove('dark')
+        localStorage.scheme = 'light'
+      } else {
+        document.documentElement.classList.add('dark')
+        localStorage.scheme = 'dark'
+      }
+    };
+
+    window.toggleTheme = function () {
+      if (document.documentElement.classList.contains('dark')) {
+        applyTheme("light")
+      } else {
+        applyTheme("dark")
+      }
+    }
+
+    window.initTheme = function() {
+      if (localStorage.scheme === 'dark' || (!('scheme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        applyTheme("dark")
+      } else {
+        applyTheme("light")
+      }
+    }
+
+    try {
+      initTheme()
+    } catch (_) {}
+  </script>
+  
   </head>
   <body>
     <%= @inner_content %>
