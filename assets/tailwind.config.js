@@ -11,8 +11,15 @@ module.exports = {
     '../lib/*_web/**/*.*ex'
   ],
   theme: {
+    screens: {
+      'lg': '1440px'
+    },
     extend: {
       colors: {
+        "checkgrad-from": "hsl(192, 100%, 67%)",
+        "checkgrad-to": "hsl(280, 87%, 65%)",
+        "caretcolor": "hsl(220, 98%, 61%)",
+        "gradcheckhover": "linear-gradient(135deg, hsl(192, 100%, 67%), hsl(192 100% 67% / 0))",
         // Dark
         "dark-bgcolor": "hsl(235, 21%, 11%)",
         "dark-fg": "hsl(234, 39%, 85%)",
@@ -26,8 +33,11 @@ module.exports = {
         'auto': '10% auto'
       },
       screens: {
-        'maxw': { 'raw': '(max-width: 640px)' },
+        'maxw': { 'raw': '(max-width: 1440px)' },
         // => @media (min-height: 800px) { ... }
+      },
+      content: {
+        'check': 'url("/images/icon-check.svg")'
       }
     },
   },
