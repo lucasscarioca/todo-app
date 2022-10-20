@@ -21,6 +21,13 @@ module.exports = {
         "bgcolor": "hsl(236, 33%, 92%)",
         "fg": "hsl(237, 14%, 26%)",
         "bgtodo": "hsl(0, 0%, 98%)",
+      },
+      gridTemplateColumns: {
+        'auto': '10% auto'
+      },
+      screens: {
+        'maxw': { 'raw': '(max-width: 640px)' },
+        // => @media (min-height: 800px) { ... }
       }
     },
   },
