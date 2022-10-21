@@ -8,13 +8,13 @@ defmodule TodoappWeb.TodoLive do
   end
 
   @impl true
-  def handle_event("submit_todo", %{"todo_input" => %{"todo" => todo, "done" => done}}, socket) do
-    Todos.create_todo(%{todo: todo, done: done})
-    {:noreply, assign(socket, todo: "")}
+  def handle_event("submit_todo", %{"new_todo" => todo}, socket) do
+    Todos.create_todo(todo)
+    {:noreply, assign(socket, todo: "", todos: Todos.list_todos())}
   end
 
   @impl true
-  def handle_event("form_update", %{"todo_input" => %{"todo" => todo, "done" => _done}}, socket) do
+  def handle_event("form_update", %{"new_todo" => %{"title" => todo, "done" => _done}}, socket) do
     {:noreply, assign(socket, todo: todo)}
   end
 
