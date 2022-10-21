@@ -19,7 +19,6 @@ module.exports = {
         "checkgrad-from": "hsl(192, 100%, 67%)",
         "checkgrad-to": "hsl(280, 87%, 65%)",
         "caretcolor": "hsl(220, 98%, 61%)",
-        "gradcheckhover": "linear-gradient(135deg, hsl(192, 100%, 67%), hsl(192 100% 67% / 0))",
         // Dark
         "dark-bgcolor": "hsl(235, 21%, 11%)",
         "dark-fg": "hsl(234, 39%, 85%)",

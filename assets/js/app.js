@@ -26,8 +26,9 @@ import { LiveSocket } from "phoenix_live_view"
 import topbar from "../vendor/topbar"
 
 import Toggle from './toggleHook'
+import Drag from "./dragHook"
 
-const Hooks = { Toggle: Toggle }
+const Hooks = { Toggle: Toggle, Drag: Drag }
 
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
 let liveSocket = new LiveSocket("/live", Socket, { params: { _csrf_token: csrfToken }, hooks: Hooks })
