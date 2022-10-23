@@ -8,7 +8,8 @@ defmodule TodoappWeb.TodoLive do
      assign(socket,
        todo: "",
        todos: order_todos(Todos.list_todos()),
-       todos_left: count_todos_left()
+       todos_left: count_todos_left(),
+       current_filter: "all"
      )}
   end
 
@@ -39,7 +40,7 @@ defmodule TodoappWeb.TodoLive do
   end
 
   @impl true
-  def handle_event("remove_todo", %{"id" => id}, socket) do
+  def handle_event("delete_todo", %{"id" => id}, socket) do
     todo = Todos.get_todo!(id)
     Todos.delete_todo(todo)
     {:noreply, fetch(socket)}
@@ -47,7 +48,7 @@ defmodule TodoappWeb.TodoLive do
 
   @impl true
   def handle_event("filter_todos", %{"filter" => "all"}, socket) do
-    {:noreply, fetch(socket)}
+    {:noreply, fetch(assign(socket, current_filter: "all"))}
   end
 
   @impl true
@@ -58,14 +59,15 @@ defmodule TodoappWeb.TodoLive do
           Todos.list_todos()
           |> Enum.filter(fn todo -> todo.done === false end)
 
-        {:noreply, assign(socket, todos: order_todos(filtered_todos))}
+        {:noreply, assign(socket, todos: order_todos(filtered_todos), current_filter: "active")}
 
       "completed" ->
         filtered_todos =
           Todos.list_todos()
           |> Enum.filter(fn todo -> todo.done === true end)
 
-        {:noreply, assign(socket, todos: order_todos(filtered_todos))}
+        {:noreply,
+         assign(socket, todos: order_todos(filtered_todos), current_filter: "completed")}
 
       _ ->
         {:error, socket}
