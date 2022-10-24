@@ -15,7 +15,8 @@ defmodule TodoappWeb.TodoLive do
 
   @impl true
   def handle_event("submit_todo", %{"new_todo" => todo}, socket) do
-    Todos.create_todo(todo)
+    new_todo = Map.put(todo, "order", length(socket.assigns.todos))
+    Todos.create_todo(new_todo)
 
     {:noreply,
      assign(socket,
@@ -43,7 +44,7 @@ defmodule TodoappWeb.TodoLive do
   def handle_event("delete_todo", %{"id" => id}, socket) do
     todo = Todos.get_todo!(id)
     Todos.delete_todo(todo)
-    {:noreply, fetch(socket)}
+    {:noreply, fetch(assign(socket, todos_left: count_todos_left()))}
   end
 
   @impl true
@@ -80,6 +81,25 @@ defmodule TodoappWeb.TodoLive do
     |> Enum.filter(fn todo -> todo.done === true end)
     |> Enum.each(fn todo -> Todos.delete_todo(todo) end)
 
+    {:noreply, fetch(assign(socket, todos_left: count_todos_left()))}
+  end
+
+  @impl true
+  def handle_event("dropped", %{"draggedId" => todo_id, "draggableIndex" => list_index}, socket) do
+    dragged_todo = Todos.get_todo!(todo_id)
+
+    new_todos =
+      socket.assigns.todos
+      |> List.delete_at(dragged_todo.order)
+      |> List.insert_at(list_index, dragged_todo)
+
+    new_todos
+    |> Enum.map(fn todo ->
+      Todos.update_todo(todo, %{
+        "order" => Enum.find_index(new_todos, fn x -> x.id == todo.id end)
+      })
+    end)
+
     {:noreply, fetch(socket)}
   end
 
@@ -96,6 +116,6 @@ defmodule TodoappWeb.TodoLive do
   end
 
   defp order_todos(todos) do
-    Enum.sort_by(todos, &Map.fetch(&1, :id))
+    Enum.sort_by(todos, &Map.fetch(&1, :order))
   end
 end

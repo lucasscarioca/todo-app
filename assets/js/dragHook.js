@@ -17,7 +17,6 @@ export default {
         onEnd: function (evt) {
           hook.pushEventTo(selector, 'dropped', {
             draggedId: evt.item.id, // id of the dragged item
-            dropzoneId: evt.to.id, // id of the drop zone where the drop occured
             draggableIndex: evt.newDraggableIndex // index where the item was dropped
           })
         }

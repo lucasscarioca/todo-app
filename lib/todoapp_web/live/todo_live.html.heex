@@ -19,9 +19,9 @@
       <%!-- MAIN CONTENT --%>
       <div class="divide-y divide-gray-300 dark:divide-gray-700 w-[85%] lg:w-[30%] shadow-xl rounded-md bg-bgtodo dark:bg-dark-bgtodo">
         <%!-- TODOS LIST --%>
-        <ul class="divide-y divide-gray-300 dark:divide-gray-700">  
+        <ul phx-hook="Drag" id="drag" class="dropzone divide-y divide-gray-300 dark:divide-gray-700">  
           <%= for todo <- @todos do %>
-            <li class="p-4 group flex justify-between items-center">
+            <li draggable="true" id={Integer.to_string(todo.id)} class="draggable p-4 group flex justify-between items-center">
               <div class="flex items-center">
                 <%= checkbox :todo, Integer.to_string(todo.id), phx_click: "toggle_done", phx_value_id: todo.id, value: todo.done, class: "peer bg-transparent mr-2 lg:mr-6 focus:ring-0 w-5 h-5 rounded-full cursor-pointer checked:bg-gradient-to-br from-checkgrad-from to-checkgrad-to bg-grad checked:after:content-check flex justify-center items-center m-auto border border-solid border-gray-300 dark:border-gray-700 hover:border-blue-500 hover:dark:border-purple-600" %>
                 <p class="peer-checked:line-through peer-checked:opacity-50"><%= todo.title %></p>
