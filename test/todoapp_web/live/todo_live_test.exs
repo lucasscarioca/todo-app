@@ -31,19 +31,25 @@ defmodule TodoappWeb.TodoLiveTest do
     assert updated_todo.done
   end
 
-  # test "User should be able to delete a todo", %{conn: conn} do
-  #   {:ok, view, _html} = live(conn, "/")
-  # end
+  test "User should be able to delete a todo", %{conn: conn} do
+    {:ok, todo} = Todoapp.Todos.create_todo(%{done: false, title: "test todo", order: 0})
+    {:ok, view, _html} = live(conn, "/")
 
-  # test "User should be able to filter for all/active/completed todos", %{conn: conn} do
-  #   {:ok, view, _html} = live(conn, "/")
-  # end
+    view
+    |> element("#delbtn_#{todo.id}")
+    |> render_click()
 
-  # test "User should be able to toggle dark/light mode", %{conn: conn} do
-  #   {:ok, view, _html} = live(conn, "/")
-  # end
+    refute has_element?(view, "#delbtn_#{todo.id}")
+  end
 
-  # test "User should be able to drag a todo to reorder", %{conn: conn} do
-  #   {:ok, view, _html} = live(conn, "/")
-  # end
+  test "User should be able to clear all completed todos", %{conn: conn} do
+    {:ok, todo} = Todoapp.Todos.create_todo(%{done: true, title: "test todo", order: 0})
+    {:ok, view, _html} = live(conn, "/")
+
+    view
+    |> element("#clear-completed")
+    |> render_click()
+
+    refute has_element?(view, "li", todo.title)
+  end
 end
