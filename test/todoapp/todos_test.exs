@@ -21,7 +21,7 @@ defmodule Todoapp.TodosTest do
     end
 
     test "create_todo/1 with valid data creates a todo" do
-      valid_attrs = %{done: true, title: "some title"}
+      valid_attrs = %{done: true, title: "some title", order: 0}
 
       assert {:ok, %Todo{} = todo} = Todos.create_todo(valid_attrs)
       assert todo.done == true

@@ -11,7 +11,7 @@
       </div>
       <%!-- INPUT --%>
       <div class="w-[85%] lg:w-[30%] flex shadow-xl rounded-md bg-bgtodo dark:bg-dark-bgtodo py-2 px-3 lg:p-4 h-13 grid-cols-auto items-center">
-        <.form let={f} for={:new_todo} phx_submit="submit_todo" phx_change="form_update" class="flex w-full">
+        <.form let={f} for={:new_todo} id="todo-form" phx_submit="submit_todo" phx_change="form_update" class="flex w-full">
           <%= checkbox f, :done, class: "bg-transparent mr-2 focus:ring-0 w-5 h-5 rounded-full cursor-pointer checked:bg-gradient-to-br from-checkgrad-from to-checkgrad-to bg-grad checked:after:content-check flex justify-center items-center m-auto border border-gray-300 dark:border-gray-700 hover:border-blue-500 hover:dark:border-purple-600" %>
           <%= text_input f, :title, value: @todo, placeholder: "Create a new todo...", class: "bg-transparent text-base lg:text-xl w-full h-full border-none focus:ring-0 caret-caretcolor" %>
         </.form>
